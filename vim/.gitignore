@@ -1,0 +1,4 @@
+.DS_Store
+*.swp
+*eclim*
+ycm_extra_conf.pyc
