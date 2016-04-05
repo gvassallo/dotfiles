@@ -11,7 +11,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/Vundle.vim'
-" The following are examples of different formats supported.
+" Git wrapper  
 Bundle 'tpope/vim-fugitive'
 " Track the engine. (UltiSnips)
 Bundle 'SirVer/ultisnips'
@@ -27,27 +27,23 @@ Bundle 'Keithbsmiley/swift.vim'
 Bundle 'MattesGroeger/vim-bookmarks'
 " Nerd Tree
 Bundle 'scrooloose/nerdtree'
+" Fuzzy search
+Bundle "haya14busa/incsearch.vim"
+Bundle "haya14busa/incsearch-fuzzy.vim"
 " Auto brackets "
 Bundle 'Raimondi/delimitMate'
-" Indent parentheses 
-Bundle 'tomasr/molokai'
 " Autocompletion for javascript 
 Bundle 'marijnh/tern_for_vim'
 " tcomment_vim 
 Bundle 'tomtom/tcomment_vim'
 " java 8 support 
 Bundle 'vim-jp/vim-java'
-" Gundo plugin 
-Bundle 'sjl/gundo.vim'
 " highlights syntax for jade file 
 Bundle 'digitaltoad/vim-jade'
 " displays indention level 
 Bundle 'Yggdroot/indentLine'
 " Vim tmux plugin 
 Bundle 'tmux-plugins/vim-tmux'
-" Fuzzy search 
-Bundle "haya14busa/incsearch.vim"
-Bundle "haya14busa/incsearch-fuzzy.vim"
 " LaTeX support for vim 
 Bundle "lervag/vimtex"
 " Elixir support for vim 
@@ -64,8 +60,20 @@ Bundle "Shougo/neomru.vim"
 Bundle "ryanoasis/vim-devicons"
 " JSX support for vim 
 Bundle 'mxw/vim-jsx'
-" Required from vim-jsx
-" Bundle 'pangloss/vim-javascript'
+" Asynchronous syntax checker 
+Bundle 'benekastah/neomake'
+" Visualize undo tree  
+Bundle 'simnalamburt/vim-mundo'
+" Support to javascript libraries 
+Bundle 'othree/javascript-libraries-syntax.vim'
+" Highlight JSON syntax 
+Bundle 'elzr/vim-json'
+" Onedark theme 
+Bundle 'joshdick/onedark.vim'
+" Onedark theme airline 
+Bundle 'joshdick/airline-onedark.vim'
+" React snippets
+Bundle "justinj/vim-react-snippets"
 
 autocmd FileType tex setl wrap linebreak textwidth=0 
 if has('patch-7.4.338')
@@ -99,6 +107,19 @@ let g:UltiSnipsListSnippets = "<c-v>"
 let g:UltiSnipsUsePythonVersion=2
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" |            NEOMAKE             |
+
+let g:neomake_open_list = 2
+
+" let g:neomake_javascript_jscs_maker = {
+"     \ 'exe': 'jscs',
+"     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
+"     \ 'errorformat': '%f: line %l\, col %c\, %m',
+"     \ }
+let g:neomake_javascript_enabled_makers = ['jshint', 'eslint']
+" Disable Neomake for C files, there is YCM already 
+let g:neomake_c_enabled_makers = []
 
 "Unite configuration 
 let g:unite_source_grep_max_candidates = 200
@@ -134,7 +155,9 @@ set incsearch
 set ignorecase 
 
 set encoding=utf-8
-set background=dark 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:onedark_termcolors = 256 
+let g:airline_theme='onedark' 
 colorscheme onedark 
 
 hi MatchParen ctermbg=red guibg=lightblue
@@ -150,7 +173,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 "java import mapping 
 nmap <C-O> :JavaImportOrganize<CR>
-nmap <C-U> :GundoToggle<CR>
+nmap <C-U> :MundoToggle<CR>
 
 "inchsearch mapping 
 map /  <Plug>(incsearch-forward)
@@ -167,12 +190,14 @@ let g:tex_fold_enabled=0
 "React support 
 let g:jsx_ext_required = 1
 let g:javascript_enable_domhtmlcss = 1
+" let g:used_javascript_libs = 'react,flux'
 
 autocmd BufRead,BufNewFile *.java UltiSnipsAddFiletypes java
 autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes javascript
 autocmd BufRead,BufNewFile *.cpp UltiSnipsAddFiletypes cpp
 autocmd BufNewFile,BufReadPost *.jade set filetype=jade
 autocmd BufNewFile,BufRead *.swift setfiletype swift
+autocmd! BufWritePost,BufEnter *.js Neomake
 
 au BufRead,BufNewFile *.asm set filetype=masm
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
