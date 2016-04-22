@@ -197,7 +197,7 @@ autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes javascript
 autocmd BufRead,BufNewFile *.cpp UltiSnipsAddFiletypes cpp
 autocmd BufNewFile,BufReadPost *.jade set filetype=jade
 autocmd BufNewFile,BufRead *.swift setfiletype swift
-autocmd! BufWritePost,BufEnter *.js Neomake
+" autocmd! BufWritePost,BufEnter *.js Neomake
 
 au BufRead,BufNewFile *.asm set filetype=masm
 au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
