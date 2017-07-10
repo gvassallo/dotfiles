@@ -49,7 +49,7 @@ kwmc config float-non-resizable on
 kwmc config lock-to-container on
 
 // Set focus-follows-mouse-mode to autoraise
-kwmc config focus-follows-mouse on
+kwmc config focus-follows-mouse off
 
 /* Focus-follows-mouse is temporarily disabled when
    a floating window has focus */
@@ -91,7 +91,9 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
 /* The following commands create rules that
    blacklists an application from Kwms tiling
 
-kwmc rule owner="Steam" properties={float="true"}
+kwmc rule owner="Spotify" properties={float="true"}
+
+kwmc rule owner="Eclipse" properties={float="true"}
 
 /* The following command creates a rule that
    captures an application to the given screen,
@@ -102,7 +104,7 @@ kwmc rule owner="iTunes" properties={display="1"} */
 // Enable border for focused window
 kwmc config border focused on
 kwmc config border focused size 2
-kwmc config border focused color 0xffe74c3c
+kwmc config border focused color 0xff2980b9
 kwmc config border focused radius 6
 
 // Enable border for marked window

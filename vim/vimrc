@@ -14,8 +14,6 @@ Bundle 'honza/vim-snippets'
 Bundle 'Valloric/YouCompleteMe'
 " Vim status line
 Bundle 'bling/vim-airline'
-" Swift syntax highlight
-Bundle 'Keithbsmiley/swift.vim'
 " Bookmarks
 Bundle 'MattesGroeger/vim-bookmarks'
 " Nerd Tree
@@ -31,16 +29,10 @@ Bundle 'marijnh/tern_for_vim'
 Bundle 'tomtom/tcomment_vim'
 " java 8 support 
 Bundle 'vim-jp/vim-java'
-" highlights syntax for jade file 
-Bundle 'digitaltoad/vim-jade'
-" displays indention level 
-Bundle 'Yggdroot/indentLine'
 " Vim tmux plugin 
 Bundle 'tmux-plugins/vim-tmux'
 " LaTeX support for vim 
 Bundle "lervag/vimtex"
-" Elixir support for vim 
-Bundle "elixir-lang/vim-elixir" 
 " Unite 
 Bundle "Shougo/unite.vim"
 " vimproc 
@@ -61,24 +53,18 @@ Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'elzr/vim-json'
 " Onedark theme 
 Bundle 'joshdick/onedark.vim'
-" Onedark theme airline 
-Bundle 'joshdick/airline-onedark.vim'
 " React snippets
 Bundle "justinj/vim-react-snippets"
 " Quoting/Parenthesizing made simple
-Bundle "tpope/vim-surround"
-" 
 Bundle "Konfekt/FastFold"
-" A blend between duotone light and firewatch for atom
-Bundle "rakr/vim-two-firewatch"
 " Vim configuration for Rust.
 Bundle "rust-lang/rust.vim"
-" Racer support for Vim 
-" Bundle "racer-rust/vim-racer"
-" Vim bundle for Racket
-Bundle "wlangstroth/vim-racket"
-" Scala suppor for Vim
-Bundle 'derekwyatt/vim-scala'
+" Retro groove color scheme for Vim
+Bundle 'morhetz/gruvbox'
+" The official VIm indent script for PHP
+Bundle '2072/PHP-Indenting-for-VIm'
+" A simple alignment operator for Vim text editor
+Bundle 'tommcdo/vim-lion'
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -87,11 +73,6 @@ filetype plugin indent on     " required
 "GENERAL SETTINGS
 "================
 "
-
-" autocmd FileType tex setl wrap linebreak textwidth=0 
-" if has('patch-7.4.338')
-"     set breakindent
-" endif
 set textwidth=130
 set showbreak=\ \
 inoremap {<CR> {<CR>}<C-o>O 
@@ -115,7 +96,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab 
 set smarttab 
-
+set foldmethod=syntax
 set backspace=indent,eol,start
 
 set wildmenu
@@ -127,16 +108,16 @@ set ignorecase
 
 set inccommand=split
 
-" set encoding=utf-8
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 let g:onedark_termcolors = 256 
 let g:airline_theme='onedark' 
+let g:airline_left_sep='›'  " Slightly fancier than '>'
+let g:airline_right_sep='‹' " Slightly fancier than '<'
 let g:airline_powerline_fonts = 1
+set background=dark
 colo onedark 
-" set background=dark " or light if you prefer the light version
-" let g:two_firewatch_italics=1
+
 
 hi MatchParen ctermbg=red guibg=lightblue
 highlight Pmenu ctermbg=7 ctermfg=0
@@ -184,8 +165,8 @@ let g:UltiSnipsEditSplit="vertical"
 "NEOMAKE
 "=======
 "
-let g:neomake_open_list = 2
-let g:neomake_javascript_enabled_makers = ['jshint', 'eslint']
+" let g:neomake_open_list = 2
+let g:neomake_javascript_enabled_makers = ['eslint']
 " Disable Neomake for C files, there is YCM already 
 let g:neomake_c_enabled_makers = []
 "
@@ -204,25 +185,18 @@ nnoremap <Leader>g :Unite grep:. <CR>
 nnoremap <Leader>L :Unite -start-insert line<CR>
 nnoremap <Leader>q :Unite -buffer-name=mru file_mru<CR> 
 "
-"====
-"RUST 
-"====
-"      
-"let g:rustfmt_autosave = 1
-"
 "========
 "MAPPINGS
 "========
 "      
 " Fast saving 
 nmap <leader>w :w!<cr>
-"nerd tree mapping 
+" nerd tree mapping 
 map <C-n> :NERDTreeToggle<CR>
-"java import mapping 
+" Java mappings 
 nmap <C-O> :JavaImportOrganize<CR>
-nmap <C-S-R> :ProjectRun<CR>
 nmap <C-U> :MundoToggle<CR>
-"inchsearch mapping 
+" inchsearch mappings
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
@@ -239,20 +213,8 @@ autocmd BufRead,BufNewFile *.java UltiSnipsAddFiletypes java
 autocmd BufRead,BufNewFile *.js UltiSnipsAddFiletypes javascript
 autocmd BufRead,BufNewFile *.cpp UltiSnipsAddFiletypes cpp
 autocmd BufRead,BufNewFile *.php UltiSnipsAddFiletypes html 
-autocmd BufNewFile,BufReadPost *.jade set filetype=jade
-autocmd BufNewFile,BufRead *.swift setfiletype swift
-" autocmd! BufWritePost,BufEnter *.js Neomake
-
-" Jflex syntax highlight 
-augroup filetype                                                     
-au BufRead,BufNewFile *.flex,*.jflex    set filetype=jflex         
-augroup END                                                          
-au Syntax jflex    so ~/.vim/syntax/jflex.vim     
-
-au BufRead,BufNewFile *.asm set filetype=masm
-au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
-au BufRead,BufNewFile *.eex set filetype=eelixir
-
+autocmd BufRead,BufNewFile *.jade set filetype=jade
+autocmd BufRead,BufNewFile *.swift set filetype=swift
+autocmd BufRead,BufNewFile *.tex set filetype=tex
 autocmd BufRead,BufNewFile *.js set shiftwidth=2
 autocmd BufRead,BufNewFile *.html set shiftwidth=2
-
