@@ -1,4 +1,4 @@
-source ~/.profile
+# source ~/.profile
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="gabriele"
+ZSH_THEME="robbyrussell"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -58,15 +58,11 @@ alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 # User configuration
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/opt/X11/bin:/Volumes/Mac-HD/MATLAB_R2015a.app/bin/:$PATH"
-export PATH="${PATH}:/usr/local/texlive/2015/bin" 
-export PATH="${PATH}:$HOME/jflex-1.6.1/jflex/bin" 
-export PATH="${PATH}:$HOME/jflex-1.6.1/" 
-export PATH="${PATH}:/Applications/racket/bin/"
+export PATH="${PATH}:/usr/local/texlive/2015/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 
 export BLUEBIRD_WARNINGS=0
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -95,19 +91,16 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias vim="DYLD_FORCE_FLAT_NAMESPACE=1 /Applications/MacVim.app/Contents/MacOS/vim"
-alias vim="nvim"
-alias latexmk="latexmk -pdf -pvc -output-directory=out" 
+alias vim='NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim'
+alias latexmk="latexmk -pdf -pvc -output-directory=out"
 alias notify="osascript  -e 'display notification \"ur stil a bitch\" with title \"Guess wat?\"'"
 alias r="ranger"
-# alias tmux="TERM=screen-256color-bce tmux"
-
-#alias dir 
-hash -d university="/Users/Ghost/Projects/university"
-hash -d padlock="/Users/Ghost/Projects/node/padlock"
-hash -d cpl="/Users/Ghost/Projects/university/comparative-programming-languages/cplwm"
-
+alias tmux="TERM=screen-256color-bce tmux"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export EDITOR="nvim"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
