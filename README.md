@@ -1,4 +1,4 @@
-# Dotfiles 
+# Dotfiles
 
-Personal OS X configuration files and utilities. 
+Personal OS X configuration files and utilities.
 
