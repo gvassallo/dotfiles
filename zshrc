@@ -1,26 +1,29 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+source $HOME/antigen/bin/antigen.zsh
 
-ZSH_THEME="robbyrussell"
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-plugins=(
-  git
-  bundler
-  osx
-  rake
-  ruby
-  rbenv
-  rails
-  docker-compose
-  docker-machine
-  docker
-  node
-  nvm
-  rvm
-  zsh-autosuggestions
-)
+antigen bundle git
+antigen bundle bundler
+antigen bundle osx
+antigen bundle rake
+antigen bundle ruby
+antigen bundle rbenv
+antigen bundle rails
+antigen bundle docker-compose
+antigen bundle docker-machine
+antigen bundle docker
+antigen bundle node
+antigen bundle nvm
+antigen bundle rvm
 
-source $ZSH/oh-my-zsh.sh
+antigen bundle zsh-users/zsh-autosuggestions
+
+# Load the theme.
+antigen theme robbyrussell
+
+# Tell Antigen that you're done.
+antigen apply
 
 alias vim="nvim"
 alias vimdiff="nvim -d"
