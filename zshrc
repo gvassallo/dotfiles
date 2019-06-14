@@ -15,7 +15,7 @@ antigen bundle docker-machine
 antigen bundle docker
 antigen bundle node
 antigen bundle nvm
-antigen bundle rvm
+antigen bundle rbenv
 
 antigen bundle zsh-users/zsh-autosuggestions
 
