@@ -29,6 +29,11 @@ alias vim="nvim"
 alias vimdiff="nvim -d"
 alias serve="ruby -run -e httpd . -p 9090"
 
+alias ba='bundle add'
+alias be='bundle exec'
+alias bi='bundle install'
+alias br='bundle remove'
+
 export TERM="xterm-256color"
 export OC_EDITOR=nvim
 
