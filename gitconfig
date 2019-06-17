@@ -1,0 +1,32 @@
+[core]
+    editor = nvim
+    excludesfile = ~/.gitignore.global
+[user]
+    name = Gabriele Vassallo
+    useconfigonly = true
+[merge]
+    tool = vimdiff
+[mergetool]
+    prompt = true
+[mergetool "vimdiff"]
+    cmd = nvim -d $LOCAL $REMOTE -c '$wincmd w' -c 'wincmd w'
+[difftool]
+    prompt = false
+[diff]
+    tool = vimdiff
+[fetch]
+    prune = true
+[branch]
+    sort=-committerdate  # DESC
+[alias]
+    d = difftool
+    create-pull-request = !sh -c 'stash pull-request $0 $@'
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+    personal = "config user.email 'gabri.vassallo01@gmail.com'"
+    work = "config user.email 'gabriele.vassallo@runtastic.com'"
