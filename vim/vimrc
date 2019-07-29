@@ -56,10 +56,11 @@ Bundle "Shougo/deoplete.nvim"
 " deoplete.nvim source for javascript
 Bundle "carlitux/deoplete-ternjs"
 " deoplete.nvim source for Ruby with solargraph.
-Bundle "uplus/deoplete-solargraph"
+" Bundle "uplus/deoplete-solargraph"
 " Asynchronous Go completion for Neovim. deoplete source for Go.
 Bundle "zchee/deoplete-go"
 " Run Rspec specs from Vim
+Bundle "tbodt/deoplete-tabnine"
 Bundle "thoughtbot/vim-rspec"
 " Refactoring tool for Ruby in vim!
 Bundle "ecomba/vim-ruby-refactoring"
@@ -77,6 +78,8 @@ Bundle "rakr/vim-one"
 Bundle "tpope/vim-surround"
 " Vim filetype and tools support for Crystal language.
 Bundle "rhysd/vim-crystal"
+" A vim plugin to toggle memoization in ruby
+Bundle "victormours/ruby-memoize.vim"
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -239,6 +242,7 @@ call denite#custom#var('file/rec', 'command',
 call denite#custom#source('file/rec', 'max_candidates', 200)
 
 hi link deniteMatchedChar Special
+
 "
 "=====
 "RSPEC
