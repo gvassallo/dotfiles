@@ -80,6 +80,14 @@ Bundle "tpope/vim-surround"
 Bundle "rhysd/vim-crystal"
 " A vim plugin to toggle memoization in ruby
 Bundle "victormours/ruby-memoize.vim"
+" Kotlin plugin for Vim
+Bundle "udalov/kotlin-vim"
+" Intellisense engine for vim8 & neovim
+Bundle "neoclide/coc.nvim"
+" A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
+Bundle "jparise/vim-graphql"
+" Syntax highlighting for thrift definition files.
+Bundle "solarnz/thrift.vim"
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -286,6 +294,16 @@ map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
+
+"===========
+" COC NVIM
+"===========
+"
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "
 "============
