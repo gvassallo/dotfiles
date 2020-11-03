@@ -1,3 +1,4 @@
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
@@ -26,7 +27,7 @@ Bundle "tomtom/tcomment_vim"
 " Vim tmux plugin
 Bundle "tmux-plugins/vim-tmux"
 " LaTeX support for vim
-Bundle "lervag/vimtex"
+" Bundle "lervag/vimtex"
 " Dark powered asynchronous unite all interfaces for Neovim/Vim8
 Bundle "Shougo/denite.nvim"
 " Unite plugin for most recently used files
@@ -55,8 +56,6 @@ Bundle "vim-ruby/vim-ruby"
 Bundle "Shougo/deoplete.nvim"
 " deoplete.nvim source for javascript
 Bundle "carlitux/deoplete-ternjs"
-" deoplete.nvim source for Ruby with solargraph.
-" Bundle "uplus/deoplete-solargraph"
 " Asynchronous Go completion for Neovim. deoplete source for Go.
 Bundle "zchee/deoplete-go"
 " Run Rspec specs from Vim
@@ -88,6 +87,12 @@ Bundle "neoclide/coc.nvim"
 Bundle "jparise/vim-graphql"
 " Syntax highlighting for thrift definition files.
 Bundle "solarnz/thrift.vim"
+" Distraction-free writing in Vim
+Bundle "junegunn/goyo.vim"
+" Rethinking Vim as a tool for writing
+Bundle "reedes/vim-pencil"
+" Hyperfocus-writing in Vim.
+Bundle "junegunn/limelight.vim"
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -145,7 +150,6 @@ set background=dark
 
 " Search options
 
-
 set hlsearch
 set incsearch
 set ignorecase
@@ -180,9 +184,6 @@ endif
 "
 " Use deoplete
 let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
@@ -191,13 +192,15 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " set sources
-let g:deoplete#sources = {}
-let g:deoplete#sources.cpp = ['LanguageClient']
-let g:deoplete#sources.python = ['LanguageClient']
-let g:deoplete#sources.python3 = ['LanguageClient']
-let g:deoplete#sources.rust = ['LanguageClient']
-let g:deoplete#sources.c = ['LanguageClient']
-let g:deoplete#sources.vim = ['vim']
+call deoplete#custom#option('sources', {
+		\ '_': ['buffer'],
+        \ 'cpp': ['LanguageClient'],
+        \ 'python': ['LanguageClient'],
+        \ 'python3': ['LanguageClient'],
+        \ 'rust': ['LanguageClient'],
+        \ 'c': ['LanguageClient'],
+        \ 'vim': ['vim'],
+		\})
 " tern
 if exists('g:plugs["tern_for_vim"]')
   " let g:tern_show_argument_hints = 'on_hold'
@@ -329,12 +332,31 @@ autocmd BufRead,BufNewFile *.html set shiftwidth=2
 autocmd BufRead,BufNewFile *.groovy set shiftwidth=2
 autocmd BufRead,BufNewFile *.go set noexpandtab
 
+command! FormatJson %!python -m json.tool
+
 " Remove trailing whitespaces when saving files
 fun! StripTrailingWhitespace()
     " Don't strip on these filetypes
-    if &ft =~ 'markdown'
+    if &ft =~ 'markdown' || &ft =~ 'yaml'
         return
     endif
     %s/\s\+$//e
 endfun
 autocmd BufWritePre * call StripTrailingWhitespace()
+
+let s:focused = 0
+function! Focus()
+  if s:focused == 0
+    let s:focused = 1
+    Goyo
+    SoftPencil
+    Limelight
+  else
+    let s:focused = 0
+    Goyo!
+    SoftPencil
+    Limelight!
+  endif
+endfunction
+
+command! Focus :call Focus()
