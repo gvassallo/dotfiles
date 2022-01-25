@@ -17,6 +17,7 @@ antigen bundle node
 antigen bundle nvm
 antigen bundle rbenv
 
+antigen bundle joshskidmore/zsh-fzf-history-search
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
@@ -42,3 +43,10 @@ if [[ -a ~/.localrc ]]
 then
   source ~/.localrc
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
