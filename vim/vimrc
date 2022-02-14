@@ -82,7 +82,7 @@ Bundle "victormours/ruby-memoize.vim"
 " Kotlin plugin for Vim
 Bundle "udalov/kotlin-vim"
 " Intellisense engine for vim8 & neovim
-Bundle "neoclide/coc.nvim"
+" Bundle "neoclide/coc.nvim"
 " A Vim plugin that provides GraphQL file detection, syntax highlighting, and indentation.
 Bundle "jparise/vim-graphql"
 " Syntax highlighting for thrift definition files.
@@ -93,6 +93,14 @@ Bundle "junegunn/goyo.vim"
 Bundle "reedes/vim-pencil"
 " Hyperfocus-writing in Vim.
 Bundle "junegunn/limelight.vim"
+" basic vim/terraform integration
+Bundle "'hashivim/vim-terraform'"
+" Typescript syntax files for Vim
+Bundle "leafgarland/typescript-vim"
+" React JSX syntax highlighting for vim and Typescript
+Bundle "peitalin/vim-jsx-typescript"
+" Vim configuration files for Elixir
+Bundle "elixir-editor"
 
 call vundle#end()
 filetype plugin indent on     " required
@@ -193,13 +201,12 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " set sources
 call deoplete#custom#option('sources', {
-		\ '_': ['buffer'],
+		\ '_': ['buffer', 'tabnine'],
         \ 'cpp': ['LanguageClient'],
         \ 'python': ['LanguageClient'],
         \ 'python3': ['LanguageClient'],
         \ 'rust': ['LanguageClient'],
         \ 'c': ['LanguageClient'],
-        \ 'vim': ['vim'],
 		\})
 " tern
 if exists('g:plugs["tern_for_vim"]')
@@ -330,6 +337,7 @@ autocmd BufRead,BufNewFile *.ts set shiftwidth=2
 autocmd BufRead,BufNewFile *.rb set shiftwidth=2
 autocmd BufRead,BufNewFile *.html set shiftwidth=2
 autocmd BufRead,BufNewFile *.groovy set shiftwidth=2
+autocmd BufNewFile,BufRead *.tsx,*.jsx set shiftwidth=2
 autocmd BufRead,BufNewFile *.go set noexpandtab
 
 command! FormatJson %!python -m json.tool
